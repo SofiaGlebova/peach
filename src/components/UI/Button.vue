@@ -4,13 +4,7 @@
     </button>
 </template>
 
-<script>
-    export default {
-        
-    }
-</script>
-
-<style lang="scss" scoped>
+<style lang="scss">
 .button {
     padding: 18px 28px;
     border: none;
@@ -26,5 +20,12 @@
 }
 .button:hover {
     background: #D43152;
+}
+
+@media (max-width: 290px) {
+    .button {
+        padding: 5px 25px;
+        font-size: 16px;
+    }
 }
 </style>

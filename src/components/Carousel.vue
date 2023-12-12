@@ -22,8 +22,8 @@ const carousel = [{img: firstSlide}, {img: secondSlide}, {img: thirdSlide}, {img
     <div class="carousel">
         <div class="carousel__top">
             <h2 class="carousel__title">Корпоративная жизнь</h2>
-            <button class="prev" />
-            <button class="next" />
+            <button class="swiper-button-next"></button>
+		    <button class="swiper-button-prev"></button>
         </div>    
         <swiper
             :modules="[
@@ -37,8 +37,8 @@ const carousel = [{img: firstSlide}, {img: secondSlide}, {img: thirdSlide}, {img
                 bulletActiveClass: 'swiper-pagination-my-bullet-active',
             }"
             :navigation="{
-                nextEl: '.next',
-                prevEl: '.prev'
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev'
             }"
 
             class="mySwiper"
@@ -101,9 +101,22 @@ const carousel = [{img: firstSlide}, {img: secondSlide}, {img: thirdSlide}, {img
     height: 50px;
     width: 100px;
 }
-
-.swiper-button-next:after {
-    background: url('../assets/icons/health.png');
+.swiper-button-next {
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    top: 24px;
+    right: 70px;
+    content: url('../assets/icons/next.png');
 }
-
+.swiper-button-prev {
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    top: 24px;
+    left: 1048px;
+    content: url('../assets/icons/prev.png');
+}
 </style>

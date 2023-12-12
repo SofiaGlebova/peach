@@ -7,7 +7,7 @@ import Mission from './components/Mission.vue';
 import Direction from './components/Direction.vue';
 import Benefits from './components/Benefits.vue';
 import Carousel from './components/Carousel.vue'
-import './assets/main.scss'
+import './assets/styles/main.scss'
 
 </script>
 

@@ -5,10 +5,10 @@
     font-family: 'Proxima Nova Condensed', sans-serif;
 }
 
-@media only screen and (max-width: 290px) {
-    .app .content {
+@media (max-width: 291px) {
+    .app .content#adaptive {
         max-width: 290px;
-        margin: 0 15px;
+        margin: 0 15px 49px;
     }
     .content .header {
         padding: 16px 5px;
@@ -19,17 +19,16 @@
             gap: 10px;
         }
         &-bg {
-            width: 290px;
+            width: 100%;
+            object-fit: cover;
+            height: 300px;
         }
         &__promo-title {
-            
-            width: 280px;
             font-size: 28px;
             margin-bottom: 20px;
         }
         &__promo-container {
-            margin: 40px 5px 96px;
-            top: 103px;
+            top: 40px;
             left: 5px;
         }
     }
@@ -40,26 +39,46 @@
     .header .header__titles-title {
         font-size: 14px; 
     }
+    .app .button {
+        padding: 5px 25px;
+    }
+
+
     .app .advantages{
-        padding: 60px 15px;
+        padding: 60px 0 50px;
     }
     .advantages .advantages__text {
-        padding: 5px 14px;
+        padding: 24px 0;
         font-size: 16px;
+        margin-top: 60px;
         
     }
     .advantages .advantages__numbers-wrapper {
         gap: 8px 24px;
-        margin-top: 50px;
+        margin: 50px 0;
+        min-height: 242px;
+        text-align: center;
+    }
+    .advantages .advantages__numbers-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     .advantages .advantages__numbers {
         padding: 0;
     }
+    .advantages .advantages__numbers-description {
+        font-size: 16px
+    }
     .advantages .advantages__numbers-number {
         font-size: 40px;
+        gap: 4px;
         span {
             font-size: 30px;
         }
+    }
+    .advantages .advantages__numbers-number .bold {
+        font-size: 30px;
     }
 
     .map .container {
@@ -67,33 +86,77 @@
     }
 
     .map .map-nav {
-        padding: 20px 5px;
+        padding: 18px 5px 20px;
+        gap: 6px;
     }
     .map .map-nav__main-title {
         font-size: 20px;
+    }
+    .map .map-nav__main-icon svg {
+        width: 20px;
     }
     .map .map__position-city {
         overflow: hidden;
     }
     .map .map__tabs {
         gap: 16px;
-        padding: 20px 5px;
+        padding: 0 5px;
         overflow: hidden;
     }
     .map .map-tab {
         font-size: 14px;
+        width: max-content;
     }
-    .map .map-map {
+    .map .map-img {
         width: 848px;
         margin: 0;
     }
+    .map .region {
+        font-size: 14px;
+        line-height: 14px;
+        gap: 0;
+        display: block;
+    }
+    .map .region__cities {
+        opacity: 0;
+        height: 0;
+    }
+    .map .drop-cities {
+        opacity: 1;
+        height: 100%;
+        color: #444444;
+    }
+    .map .red {
+        color: #A30C33;
+    }
+    .map .white {
+        display: none;
+    }
 
     .dropdown .dropdown__container {
-        gap: 16px;
+        display: none;
+    }
+    .map .dropdown .active {
+        padding: 15px 5px;
+    }
+
+    .map .mobile {
+        display: grid;
+        gap: 15px 0;
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        grid-template-columns: 1fr 1fr 1fr;
+        transition: all 1s;
     }
 
     .mission .mission__bg {
         width: 290px;
+        min-height: 195px;
+    }
+    .mission .mission__bg-icon {
+        width: 36%;
+        top: 14%;
     }
     .mission .mission__content {
         padding: 0;
@@ -101,11 +164,12 @@
     }
     .mission .mission__content-header {
         font-size: 28px;
-        margin-bottom: 0;
+        margin-bottom: 10px;
     }
     .mission .mission__content-description {
         font-size: 16px;
         padding: 0 5px;
+        margin-bottom: 32px;
     }
 
     .direction .direction__title {
@@ -117,10 +181,32 @@
         margin-top: 15px;
         grid-template-columns: 1fr;
     }
+    .direction .direction__item {
+        height: 60px;
+    }
+    // .direction .direction__item:hover {
+    //     height: 240px;
+    // }
     .direction .direction__items .direction__item-title {
         font-size: 20px;
+        padding: 20px 10px;
     }
-
+    .direction .direction__img:hover {
+        height: 240px;
+    }
+    .direction .direction__img {
+        width: 280px;
+        height: 60px;
+        object-fit: cover;
+    }
+    .direction .effect#priority {
+        top: 0;
+        width: 280px;
+    }
+    .direction .effect#priority:hover {
+        top: 0;
+        width: 280px;
+    }
     .app .benefits {
         margin: 24px 5px;
     }
@@ -178,4 +264,14 @@
     .carousel .carousel__pagination {
         display: none;
     }
+    .carousel .swiper-button-prev {
+        display: none;
+    }
+    .carousel .swiper-button-next {
+        display: none;
+    }
 }
+
+    
+
+    

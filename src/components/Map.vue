@@ -4,14 +4,39 @@
             <div class="map-nav">
                 <h2 class="map-nav__main-title">Офисы Softline</h2>
                 <button @click="toggleDropdown" :class="['map-nav__main-icon', {['rotate']: isActive}]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <svg @click="toggleMobileDropdown" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M2.10156 7.99683L12.1016 16.0179L22.1016 7.99683" stroke="#444444" stroke-width="3"/>
                     </svg>
                 </button>
 
+                <div :class="['mobile__dropdown', {'mobile': mobileActive}]">
+                    <template
+                        v-for="(value, name, index) in regions" 
+                        :key="index"
+                    >
+                        <div :class="['region', {'red': addMarkRegion}]" v-if="!['Все'].includes(name)">
+                            {{ name }}
+                            <div class="mobile__btn" @click="toggleCitiesDropdown(name)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="4" viewBox="0 0 8 4" fill="none">
+                                    <path d="M4 4L7.4641 0.25H0.535898L4 4Z" fill="#444444"/>
+                                </svg>
+                            </div>
+                            <div :class="['region__cities', {'drop-cities': citiesActive}]" 
+                                v-if="name !== 'Москва'">
+                                <div
+                                    v-for="city in value"
+                                    :key="city.name"
+                                >
+                                    {{ city.name }}
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
                 <div :class="[
                     'dropdown', 
-                    { ['active']: isActive }
+                    {  ['active']: isActive }
                 ]" >
                     <div class="dropdown__container">
                         <template 
@@ -24,16 +49,16 @@
                             >
                                 <div class="region">
                                 {{ name }}
-                                <div class="region__cities" 
-                                v-if="name !== 'Москва'">
-                                    <div 
-                                        
-                                        v-for="city in value"
-                                        :key="city.name"
-                                    >
-                                        {{ city.name }}
+                                    <div class="region__cities" 
+                                    v-if="name !== 'Москва'">
+                                        <div 
+                                            
+                                            v-for="city in value"
+                                            :key="city.name"
+                                        >
+                                            {{ city.name }}
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
                             </div>
                         </template>
@@ -51,9 +76,7 @@
             </div>  
         </div>
         <div class="map__position-city">
-            <img 
-                class='map-map'
-                src="../assets/img/map.png" alt="">
+            <div :class="['map-img', {'white': isActive}]">
             <template 
                 v-for="(value, name, index) in regions"                
                 :key="index"
@@ -66,9 +89,10 @@
                         :style="{top:`${city.position.y}px`, left:`${city.position.x}px`}"
                     >
                     {{city.name}}
-                </div>
+                    </div>
                 </template>
             </template>
+            </div>
         </div>
     </div>
 </template>
@@ -84,11 +108,26 @@ import { ref } from 'vue';
             }
         }
     }
-
+    const isActive = ref(false)
+    const mobileActive = ref(false)
+    const citiesActive = ref(false)
+    const addMarkRegion = ref(false)
     const selectedRegion = ref('Все')
 
     const toggleDropdown = () => {
         isActive.value = !isActive.value
+    }
+    const toggleMobileDropdown = () => {
+        mobileActive.value = !mobileActive.value
+    }
+    const toggleCitiesDropdown = (region) => {
+        citiesActive.value = !citiesActive.value
+        if (region) {
+            console.log(region)
+            
+           addMarkRegion.value = !addMarkRegion.value 
+        }
+        
     }
     
     const onSelectRegion = (value) => {
@@ -98,52 +137,50 @@ import { ref } from 'vue';
     const regions = {
         'Все': [],
         'Москва': [
-            getCityObject('Москва', 151, 234)
+            getCityObject('Москва', 123, 236)
         ],
         'Центр': [
-            getCityObject('Воронеж', 98, 255),
-            getCityObject('Ярославль', 177, 207),
-            getCityObject('Белгород', 93, 285),
+            getCityObject('Воронеж', 74, 258),
+            getCityObject('Ярославль', 154, 210),
+            getCityObject('Белгород', 70, 288),
         ],
         'Северо-Запад': [
-            getCityObject('Санкт-Петербург', 134, 147),
-            getCityObject('Калининград', 42, 134)
+            getCityObject('Санкт-Петербург', 109, 145),
+            getCityObject('Калининград', 10, 137)
         ],
         'Юг': [
-            getCityObject('Ростов-на-Дону', 66, 327),
-            getCityObject('Краснодар', 53.3, 385),
-            getCityObject('Волгоград', 111, 368)
+            getCityObject('Ростов-на-Дону', 42, 332),
+            getCityObject('Краснодар', 24.3, 390),
+            getCityObject('Волгоград', 85, 373)
             
         ],
         'Волга': [
-            getCityObject('Казань', 260, 307),
-            getCityObject('Самара', 200, 313),
-            getCityObject('Уфа', 270, 343),
-            getCityObject('Оренбург', 226, 371),
-            getCityObject('Н. Новгород', 192, 269)
+            getCityObject('Казань', 234, 310),
+            getCityObject('Самара', 171, 318),
+            getCityObject('Уфа', 244, 347),
+            getCityObject('Оренбург', 197, 377),
+            getCityObject('Нижний Новгород', 163, 272)
         ],
         'Урал': [
-            getCityObject('Екатеринбург', 315, 335),
-            getCityObject('Челябинск', 317, 370),
-            getCityObject('Пермь', 387, 308),
-            getCityObject('Сургут', 442, 320),
-            getCityObject('Тюмень', 415, 370),
-            getCityObject('Ижевск', 334, 299),
+            getCityObject('Екатеринбург', 288, 340),
+            getCityObject('Челябинск', 291, 374),
+            getCityObject('Пермь', 364, 311),
+            getCityObject('Сургут', 418, 323),
+            getCityObject('Тюмень', 392, 375),
+            getCityObject('Ижевск', 310, 301),
         ],
         'Сибирь': [
-            getCityObject('Новосибирск', 513, 463),
-            getCityObject('Омск', 478, 484),
-            getCityObject('Томск', 593, 441),
-            getCityObject('Красноярск', 638, 464),
-            getCityObject('Иркутск', 697, 497)
+            getCityObject('Новосибирск', 480, 465),
+            getCityObject('Омск', 446, 485),
+            getCityObject('Томск', 563, 443),
+            getCityObject('Красноярск', 606, 467),
+            getCityObject('Иркутск', 670, 500)
         ],
         'Дальний Восток': [
-            getCityObject('Хабаровск', 985, 478),
-            getCityObject('Владивосток', 966, 581)
+            getCityObject('Хабаровск', 954, 481),
+            getCityObject('Владивосток', 937, 586)
         ]
     }
-
-    let isActive = ref(false)
 </script>
 
 <style lang="scss" scoped>
@@ -154,6 +191,7 @@ import { ref } from 'vue';
 }
 .map-nav {
     display: flex;
+    flex-wrap: wrap;
     gap: 0 16px;
     padding: 28px 0 28px 70px;
     &__main-title {
@@ -191,23 +229,30 @@ import { ref } from 'vue';
     line-height: 20px;
     height: 54px;
 }
-.map-map {
-    display: block;
-    margin: 90px auto 100px;
-    // position: relative;
+.map-img {
+    background-image: url('../assets/img/map.svg');
+    height: 601px;
+    background-repeat: no-repeat;
+    margin: 90px 29px 100px;
+    position: relative;
+    
 }
 .region {
     display: flex;
     flex-direction: column;
     gap: 10px;
     font-weight: 600;
+    font-size: 18px;
+    color: #444;
+    line-height: 20px;
+    position: relative;
     &__cities {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 10px;  
+        font-weight: 400; 
     }
 }
-
 .coordinates {
     position: absolute;
     color: #444;
@@ -232,7 +277,6 @@ import { ref } from 'vue';
 .dropdown {
     position: absolute;
     background-color: white;
-    padding: 30px 60px;
     width: 100%;
     top: 70px;
     left: 0; 
@@ -245,10 +289,8 @@ import { ref } from 'vue';
         display: flex;
         gap: 24px;
         justify-content: center;
+        padding: 43px 0 17px;
     }
-}
-.map__position-city {
-    position: relative;
 }
 .active {
     opacity: 1;
@@ -264,6 +306,10 @@ import { ref } from 'vue';
 }
 .white {
     opacity: 0.2;
+}
+.mobile__dropdown {
+    opacity: 0;
+    height: 0;
 }
 
 </style>

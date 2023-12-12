@@ -12,7 +12,8 @@ const titles = ref([
 </script>
 
 <template>
-  <header class="header">
+  <div>
+    <header class="header">
     <div class="header__logo">
       <svg xmlns="http://www.w3.org/2000/svg" width="125" height="25" viewBox="0 0 125 25" fill="none">
         <g clip-path="url(#clip0_1_1370)">
@@ -39,17 +40,21 @@ const titles = ref([
       <div class="header__titles-title" v-for="(title, index) in titles" :key="index">{{ title.name }}</div>
     </div>
   </header>
-  <div class="header__promo">
-    <div class="header__promo-bg"><img src="../assets/img/header_bg.jpg" alt="header-bg" class="header-bg"></div>
-    <div class="header__promo-container">
-      <h1 class="header__promo-title">Поставщик услуг цифровой трансформации и кибербезопасности</h1>
-      <Button>На сайт</Button>
+    <div class="header__promo">
+      <div class="header__promo-bg"><img src="../assets/img/header_bg.jpg" alt="header-bg" class="header-bg">
+      <div class="header__promo-container">
+        <h1 class="header__promo-title">Поставщик услуг цифровой трансформации и кибербезопасности</h1>
+        <Button>На сайт</Button>
+      </div>
+      </div>
+      
     </div>
-    
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
+@import '../assets/styles/variables.scss';
+
   .header {
     padding: 30px 70px;
     display: flex;
@@ -67,19 +72,15 @@ const titles = ref([
         line-height: 20px;
       }
     }
-    &__promo {
-      
-      top: 303px;
-    }
     &__promo-container {
       position: absolute;
-      top: 243px;
-      left: 205px;
+      top: 158px;
+      left: 70px;
     }
     &__promo-title {
       max-width: 709px;
       margin-bottom: 60px;
-      color: #444;
+      color: $text-color;
       font-size: 56px;
       font-style: normal;
       font-weight: 600;
