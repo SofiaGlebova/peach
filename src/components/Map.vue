@@ -219,6 +219,7 @@ import { ref } from 'vue';
     display: flex;
     gap: 30px;
     align-items: flex-start;
+    width: 100%;
 }
 .map-tab {
     color: #444;

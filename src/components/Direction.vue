@@ -6,9 +6,9 @@
                 <div :class="['direction__item', {'show': trigger}]" id="id" v-for="(direction, index) in directions" :key="index">
                     <img :src="direction.img" alt="direction" id="id" :class="['direction__img', {'show': trigger}]">
                     <div class="effect" id="priority">
-                        <div class="direction__item-title">
+                        <div class="direction__item-title" @click="toggleDescription(index)">
                         {{ direction.title }}
-                            <div class="direction-dropdown" @click="toggleDescription(index)">
+                            <div class="direction-dropdown" >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
                                     <path d="M11.5713 14.7858L17.9999 21.2143L24.4284 14.7858" stroke="white" stroke-width="2"/>
                                 </svg>
@@ -47,28 +47,7 @@ import im from '../assets/img/impor.jpg'
     }
 </script>
 
-<style lang="scss" scoped>
-
-@media screen and (max-width: 291px) {
-.direction-dropdown {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-}
-.direction .direction__item-title {
-    display: flex;
-}
-.direction-wrapper {
-    padding: 0 5px;
-}
-.direction .direction__item-description {
-    font-size: 16px;
-    font-weight: 300;
-}
-.show#id {
-    height: 240px;
-}
-}
+<style lang="scss">
 
 .direction {
     &__img {
@@ -121,23 +100,48 @@ import im from '../assets/img/impor.jpg'
         font-style: normal;
         font-weight: 400;
         line-height: 140%;
-        
     }
-.effect {
-    // opacity: 0.6;
-    background: rgba($color: #2D3653, $alpha: 0.6);
-    position: absolute;
-    top: 180px;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transition: all 0.4s ease-in-out;
-}
-.effect:hover {
-    position: absolute;
-    overflow: hidden;
-    top: 0;
-    left: 0;
-}
+    &-dropdown {
+        display: none;
+    }
+    .effect {
+        // opacity: 0.6;
+        background: rgba($color: #2D3653, $alpha: 0.6);
+        position: absolute;
+        top: 180px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transition: all 0.4s ease-in-out;
+    }
+    .effect:hover {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+    }
+    @media (max-width: 291px) {
+        .direction-dropdown {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+        
+        .direction .direction__item-title {
+            display: flex;
+        }
+        .direction-wrapper {
+            padding: 0 5px;
+        }
+        .direction .direction__item-description {
+            font-size: 16px;
+            font-weight: 300;
+        }
+        .show#id {
+            height: 240px;
+        }
+
+    }
+    
 }
 </style>
